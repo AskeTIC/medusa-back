@@ -2,8 +2,8 @@
 var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var sensors = io.of(/sensors);
-var useres = io.of(/users); 
+var sensors = io.of('/sensors');
+var useres = io.of('/users'); 
 
 //EVENTOS
 //Cuando se establece una conexión desde un cliente user...
