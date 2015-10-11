@@ -4,13 +4,13 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var sensors = io.of('/sensors');
-var users = io.of('/users'); 
+var users = io.of('/'); 
 
 //MIDDLEWARES
-app.use(express.static('public'));
+app.use(express.static('../medusa-front'));
 
 //RUTAS
-app.get('/', function(req, res) {  
+app.get('/error', function(req, res) {  
   res.status(200).send("Hello World!");
 });
 
@@ -21,7 +21,7 @@ users.on('connection', function(socket){
 	//Muestro un aviso en backend 
 	console.log('Usuario conectado!');
 	//Emito al usuario conectado un evento y un mensaje
-	socket.emit('conexion-realizada', 'Conectado con éxito');
+	socket.emit('conexion realizada', 'Conectado con éxito');
 
 	//Cuando se desconecta el usuario...
 	socket.on('disconnect', function () {
