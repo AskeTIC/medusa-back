@@ -1,9 +1,19 @@
 //LIBRERIAS
-var app = require('express')();
+var express = require('express');
+var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var sensors = io.of('/sensors');
-var useres = io.of('/users'); 
+var users = io.of('/users'); 
+
+//MIDDLEWARES
+app.use(express.static('public'));
+
+//RUTAS
+app.get('/', function(req, res) {  
+  res.status(200).send("Hello World!");
+});
+
 
 //EVENTOS
 //Cuando se establece una conexión desde un cliente user...
@@ -25,7 +35,7 @@ sensors.on('connection', function(socket){
 	//Muestro un aviso en el backend
 	console.log('Sensor conectado!');
 	//Emito al sensor un evento y un mensaje para actuar en consecuencia.
-	socket.emit('conexion-rea0lizada', 'Conectado');
+	socket.emit('conexion-realizada', 'Conectado');
 
 
 	//Cuando recibo datos del sensor1...
