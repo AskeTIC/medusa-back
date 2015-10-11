@@ -1,23 +1,32 @@
-//LIBRERIAS
+//MODULOS DE TERCEROS
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
+
+//MODULOS PROPIOS
+var utils = require('./utils/utils.js');
+var routes = require('./routes/routes.js');
+
+//Definición de namesapaces para sokets que vamos a usar.
 var sensors = io.of('/sensors');
 var users = io.of('/'); 
 
 //MIDDLEWARES
 app.use(express.static('../medusa-front'));
 
+//Le indicamos que use nuestro enrutador
+app.use('/', routes.router);
+
 //RUTAS
-app.get('/error', function(req, res) {  
+app.get('/test', function(req, res) {  
   res.status(200).send("Hello World!");
 });
 
 
 //EVENTOS
 //Cuando se establece una conexión desde un cliente user...
-users.on('connection', function(socket){  
+users.on('connection', function(socket){
 	//Muestro un aviso en backend 
 	console.log('Usuario conectado!');
 	//Emito al usuario conectado un evento y un mensaje
