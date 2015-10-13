@@ -5,29 +5,23 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
 //MODULOS PROPIOS
-var utils = require('./utils/utils.js');
-var routes = require('./routes/routes.js');
+var errors = require('./utils/errors');
+var routes = require('./routes/routes');
 
 //Definición de namesapaces para sokets que vamos a usar.
 var sensors = io.of('/sensors');
-var users = io.of('/'); 
+var users = io.of('/');
 
 //MIDDLEWARES
 app.use(express.static('../medusa-front'));
 
-//Le indicamos que use nuestro enrutador
+//Le indicamos a nuestra app que use nuestro enrutador
 app.use('/', routes.router);
-
-//RUTAS
-app.get('/test', function(req, res) {  
-  res.status(200).send("Hello World!");
-});
-
 
 //EVENTOS
 //Cuando se establece una conexión desde un cliente user...
 users.on('connection', function(socket){
-	//Muestro un aviso en backend 
+	//Muestro un aviso en backend
 	console.log('Usuario conectado!');
 	//Emito al usuario conectado un evento y un mensaje
 	socket.emit('conexion realizada', 'Conectado con éxito');
@@ -46,18 +40,17 @@ sensors.on('connection', function(socket){
 	//Emito al sensor un evento y un mensaje para actuar en consecuencia.
 	socket.emit('conexion-realizada', 'Conectado');
 
-
 	//Cuando recibo datos del sensor1...
-        socket.on('data-sensor1', function(){
-                console.log('guardar en BBDD y enviar a cliente.');
-        });
+    socket.on('data-sensor1', function(){
+        //TODO: guardar el BBDD y enviar al cliente correspondiente.
+        console.log('guardar en BBDD y enviar a cliente.');
+    });
 
-	//Cuando se desconecta el sensor... 
+	//Cuando se desconecta el sensor...
 	socket.on('disconnect', function () {
-                //Haré algo al respecto, si pogo io.emit envío a todos los usuarios
-                socket.emit('user disconnected'); //En este caso me interesará avis$
-        });
-
+        //Haré algo al respecto, si pogo io.emit envío a todos los usuarios
+        socket.emit('user disconnected'); //En este caso me interesará avis$
+    });
 
 });
 
@@ -65,6 +58,6 @@ sensors.on('connection', function(socket){
 
 
 //PUESTA EN ESCUCHA DEL SERVER
-server.listen(3030, function() {  
+server.listen(3030, function() {
     console.log('Servidor corriendo http://localhost:3030');
 });
