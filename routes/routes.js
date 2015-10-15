@@ -10,6 +10,12 @@ var Temp = require("../models/temps");
 var temp = new Temp(mongoDB);
 
 //RUTAS
+router.route('/')
+	.get(function(req, res){
+		console.log('cliente servido!');//TODO: no aparece en consola.
+		res.sendFile('public/index.html');
+	});
+
 router.route('/test')
 	.get(function(req, res, next) {
   		res.status(200).send("Hello World!");

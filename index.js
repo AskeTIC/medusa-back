@@ -10,10 +10,11 @@ var routes = require('./routes/routes');
 
 //Definición de namesapaces para sokets que vamos a usar.
 var sensors = io.of('/sensors');
-var users = io.of('/orders');
+var users = io.of('/');
 
 //MIDDLEWARES
-app.use(express.static('../medusa-front'));
+app.use(express.static('public'));
+
 
 //Le indicamos a nuestra app que use nuestro enrutador
 app.use('/', routes.router);
@@ -32,25 +33,25 @@ users.on('connection', function(socket){
 	//Cuando recibo el evento carga-controller...
 	socket.on('carga-controller', function(orden){
 
-		console.log('carga-controller :' + orden)
+		console.log('carga-controller :' + orden);
 	});
 
 	//Cuando recibo el evento desplazamiento-controller...
-	socket.on('dezplazamiento-controller', function(orden){
+	socket.on('desplazamiento-controller', function(orden){
 
-		console.log('desplazamiento-controller :' + orden)
+		console.log('desplazamiento-controller :' + orden);
 	});
 
 	//Cuando recibo el evento vela-controller...
 	socket.on('vela-controller', function(orden){
 
-		console.log('vela-controller :' + orden)
+		console.log('vela-controller :' + orden);
 	});
 
 	//Cuando recibo el evento pertiga-controller...
 	socket.on('pertiga-controller', function(orden){
 
-		console.log('pertiga-controller :' + orden)
+		console.log('pertiga-controller :' + orden);
 	});
 
 
@@ -58,10 +59,12 @@ users.on('connection', function(socket){
 	//Cuando recibo el evento sistems-controller...
 	socket.on('sistems-controller', function(data){
 		var status = false;
-		if(status !== true){
+		if(status === true){
 			socket.emit('sistems-up', data);//TODO: Pasarle algo? En principio creo que dependiendo la fase o ensayo quizás haya que crear algo al respecto.
+			status = false;
 		}else{
-			socket.emit('sistems-down', data)//TODO: Pasarles algo?
+			socket.emit('sistems-down', data+1)//TODO: Pasarle algo?
+			status = true;
 		}
 	});
 
