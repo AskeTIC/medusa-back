@@ -46,7 +46,7 @@ module.exports = function(){
                 socket.emit('sensor disconnected'); //En este caso me interesará enviar a los clientes usuarios no sensores.
             });
 
-        });
+        }
 
     }
 }

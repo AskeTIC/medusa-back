@@ -10,7 +10,10 @@ var errors = require('./utils/errors');
 var routes = require('./routes/routes');
 //var sensors = require('./events/sensors');
 var Orders = require('./events/orders');
+var Sensors = require('./events/sensors');
 var orders = Orders();
+var sensors = Sensors();
+
 
 //EVENTOS
 //Definición de namesapaces para sokets que vamos a usar.

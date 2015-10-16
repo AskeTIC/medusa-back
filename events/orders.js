@@ -36,18 +36,16 @@ module.exports = function Orders(){
 
             //ORDENES GENERALES: SISTEMAS, ETC..
             //Cuando recibo el evento sistems-controller...
+            var status = false;
             socket.on('sistems-controller', function(data){
-                var status = false;
                 if(status === true){
                     socket.emit('sistems-up', data);//TODO: Pasarle algo? En principio creo que dependiendo la fase o ensayo quizás haya que crear algo al respecto.
                     console.log(status);
                     status = false;
-                    console.log(status);
                 }else{
                     socket.emit('sistems-down', data+1)//TODO: Pasarle algo?
                     console.log(status);
                     status = true;
-                    console.log(status);
                 }
             });
 
