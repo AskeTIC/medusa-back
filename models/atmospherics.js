@@ -1,17 +1,17 @@
-//MODELO DE TEMPERATURA
+//MODELO DE ESTACION METEOROÓGICA (sensor o sensores meteorológicos)
 
 //Nuestro objeto Temp recibe la cadena de conexión. Ahora en routes.js que podría estar en el módulo específico.
-module.exports = function Temp(mongoDB){
+module.exports = function Atmospherics(mongoDB){
 	//REQUERIMOS MODULOS DE TERCEROS
 	//Objeto cliente que trae el propio módulo oficial de MongoDB
 	var MongoClient = require('mongodb').MongoClient;
 	//String con la colección que vamos a usar.
-	var colName = "temperatures";
+	var colName = "atmospherics";
 
 	//ENVOLVEMOS LA FUNCION -connect- DE MONGO CON UNA NUESTRA PARA TRATAR ERROES Y COLECCIONES.
 	/*TODO: pasarla a un archivo models.js para las funciones abstractas e insertar en cada modelo,
 	hará que pasarle la colName como parámetro e instanciar el cliente también en dicho archivo*/
-	function connect(cbDesdeLosModelos){
+	function connect(cbDesdeLosModelos){ //TODO: ya estamos en los modelos, esta función hay que pasárla a un modelo genérico.
 		//Ejecutamos la función -connect- de mongo...
 		MongoClient.connect(mongoDB,function(err, db){
 			//...si hay error lo pasamos como parámentro al
@@ -32,7 +32,7 @@ module.exports = function Temp(mongoDB){
 
 	return{
 		//devolvemos estos 2 métodos que nos llaman desde el router.js
-		getTemp: function(cbDesdeElEnrutador){
+		getAtmospheric: function(cbDesdeElEnrutador){
 			//Llamamos a nuestra función connect y le pasamos un parametros, que será...
 			//callback que es llamado desde el error o no error de arriba
 			connect(function (err, collection){
@@ -43,7 +43,7 @@ module.exports = function Temp(mongoDB){
 
 		},
 
-		postTemp: function(doc,cbDesdeElEnrutador){
+		postAtmospheric: function(doc,cbDesdeElEnrutador){
 			connect(function (err,collection){
 				collection.insert(doc,cbDesdeElEnrutador);
 			})

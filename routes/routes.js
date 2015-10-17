@@ -6,8 +6,8 @@ var router = express.Router();
 //REQUERIMOS MODULOS PROPIOS
 var errors = require('../utils/errors');
 var mongoDB = "mongodb://localhost:27017/medusa";
-var Temp = require("../models/temps");
-var temp = new Temp(mongoDB);
+var Atmospherics = require("../models/atmospherics");
+var atmospherics = new Atmospherics(mongoDB);
 
 //RUTAS
 router.route('/')
@@ -22,10 +22,10 @@ router.route('/test')
 	});
 
 //de momento vamos a trabajar la temperatura con REST para probar bien mongoDB
-router.route('/temp')
+router.route('/atmospherics')
 	.get(function(req, res, next){
 		//obtener la temperatura
-		temp.getTemp(function(err, docs){
+		atmospherics.getAtmospheric(function(err, docs){
 			if(err){
 				errors.tratarError(err, res);
 			}
@@ -35,7 +35,8 @@ router.route('/temp')
 	.post(function(req, res, next){
 		//guardar la temperatura
 		var doc = req.body;
-		temp.postTemp(doc, function(err, docs){
+		//TODO:comprobar si existe la colleción y crearla si no existe.
+		atmospherics.postAtmospheric(doc, function(err, docs){
 			if(err){
 				errors.tratarError(err, res);
 			}
