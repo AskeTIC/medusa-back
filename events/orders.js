@@ -2,7 +2,10 @@ var DbModelSensors = require('../models/sensors');
 
 module.exports = function Orders(){
 
+    //un objeto por cada collección a usar.
     var atmospherics = new DbModelSensors("atmospherics");
+    //var distances = new DbModelSensors("distances");
+    //var strongs = new DbModelSensors("strongs");
 
     return {
 
@@ -34,16 +37,8 @@ module.exports = function Orders(){
             //Cuando recibo el evento pertiga-controller...
             socket.on('pertiga-controller', function(orden){
 
-                console.log('Recibido evento pertiga-controller, con la data:' + orden.data);
-                atmospherics.postDocuments(orden, cbPostDocument);
-
-                function cbPostDocument(err, orden){ //Este es el cdDesdeElEnrutador
-        			if(err){
-        				console.log('error desde el enrutador');
-        				errors.tratarError(err, res);// modificar para tratar basado en WebSocket
-        			}
-        			console.log('insertado:'+orden);
-        		}
+                console.log('Recibido evento pertiga-controller, con la data:' + orden);
+                atmospherics.postDocuments(orden, atmospherics.cbPostDocuments);
 
             });
 
