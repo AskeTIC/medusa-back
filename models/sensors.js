@@ -1,10 +1,11 @@
 //REQUERIMOS MODULOS DE TERCEROS
 //Objeto cliente que trae el propio módulo oficial de MongoDB
 var MongoClient = require('mongodb').MongoClient;
+var ModelGeneral = require('./general');
 
 //Nuestro objeto Db recibe el string de la collección o modelo específico
 //TODO: poder pasarle otra BBDD
-var Db = function(colName){
+var DbModelSensors = function(colName){
     //atributos privados
     var mongoDB = "mongodb://localhost:27017/medusa";
     var database ;
@@ -12,6 +13,9 @@ var Db = function(colName){
 
     //construcción del objeto
     ownConnect(colName, cbOwnConnect );
+
+    //heredamos los métodos de ModelGeneral
+    ModelGeneral.apply(this);
 
     //métodos públicos
     this.getDocuments = function (cbDesdeElEnrutador){
@@ -67,5 +71,6 @@ var Db = function(colName){
         console.log('conexion a la BBDD realizada con éxito');
     }
 };
-
-module.exports = Db;
+var db = new DbModelSensors('atmospherics');
+console.log(db.cbPostDocuments);
+module.exports = DbModelSensors;
