@@ -24,7 +24,7 @@ ordersIo.on('connection', orders.connectionOrders);
 sensorsIo.on('connection', sensors.connectionSensors);
 
 //MIDDLEWARES
-app.use(express.static('public'));
+app.use(express.static('../medusa-front'));
 //Le indicamos a nuestra app que use nuestro enrutador
 app.use('/', routes.router);
 

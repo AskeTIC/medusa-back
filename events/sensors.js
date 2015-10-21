@@ -4,16 +4,17 @@ var DbModelSensors = require('../models/sensors');
 module.exports = function Sensors(){
 
     //un objeto por cada collección a usar.
-    var atmospherics = new DbModelSensors("atmospherics");
-    var distances = new DbModelSensors("distances");
-    var strongs = new DbModelSensors("strongs");
-    var inclinometers = new DbModelSensors("inclinometers");
-    var flowmeters = new DbModelSensors("flowmeters");
-    var microwaves = new DbModelSensors("microwaves");
-    var consumptions = new DbModelSensors("consumptions");
-    var anemometers = new DbModelSensors("anemometers");
-    var lapCounters = new DbModelSensors("lapcounters");
-    var guides = new DbModelSensors("guides");
+    //TODO: pasarle un array y que exporte las variables en el contexto, para haver solo una invocación a un método.
+    var atmospherics   = new DbModelSensors("atmospherics");
+    var distances      = new DbModelSensors("distances");
+    var strongs        = new DbModelSensors("strongs");
+    var inclinometers  = new DbModelSensors("inclinometers");
+    var flowmeters     = new DbModelSensors("flowmeters");
+    var microwaves     = new DbModelSensors("microwaves");
+    var consumptions   = new DbModelSensors("consumptions");
+    var anemometers    = new DbModelSensors("anemometers");
+    var lapCounters    = new DbModelSensors("lapcounters");
+    var guides         = new DbModelSensors("guides");
 
 
     return {
@@ -30,7 +31,7 @@ module.exports = function Sensors(){
             socket.on('data-atmospherics', function(data){
                 //TODO: enviar al cliente correspondiente.
                 console.log('data-atmospherics : '+data);
-                atmospherics.postDocuments(orden, atmospherics.cbPostDocument);
+                atmospherics.postDocuments(orden, atmospherics.cbPostDocuments);
 
             });
 
@@ -39,7 +40,7 @@ module.exports = function Sensors(){
         	socket.on('data-inclinometers', function(data){
         		//TODO: enviar al cliente correspondiente.
         		console.log('data-inclinometers : '+data);
-                inclinometer.postDocuments(orden, inclinometer.cbPostDocument);
+                inclinometer.postDocuments(orden, inclinometer.cbPostDocuments);
 
         	});
 
@@ -47,7 +48,7 @@ module.exports = function Sensors(){
             socket.on('data-strongs', function(data){
         		//TODO: enviar al cliente correspondiente.
         		console.log('data-strongs : '+data);
-                strongs.postDocuments(orden, strongs.cbPostDocument);
+                strongs.postDocuments(orden, strongs.cbPostDocuments);
 
         	});
 
@@ -55,7 +56,7 @@ module.exports = function Sensors(){
             socket.on('data-distances', function(data){
         		//TODO: enviar al cliente correspondiente.
         		console.log('data-distances : '+data);
-                distances.postDocuments(orden, distances.cbPostDocument);
+                distances.postDocuments(orden, distances.cbPostDocuments);
 
         	});
 
@@ -63,7 +64,7 @@ module.exports = function Sensors(){
             socket.on('data-flowmeters', function(data){
                 //TODO: enviar al cliente correspondiente.
                 console.log('data-flowmeters : '+data);
-                flowmeters.postDocuments(orden, flowmeters.cbPostDocument);
+                flowmeters.postDocuments(orden, flowmeters.cbPostDocuments);
 
             });
 
@@ -71,7 +72,7 @@ module.exports = function Sensors(){
             socket.on('data-microwaves', function(data){
                 //TODO: enviar al cliente correspondiente.
                 console.log('data-microwaves : '+data);
-                microwaves.postDocuments(orden, microwaves.cbPostDocument);
+                microwaves.postDocuments(orden, microwaves.cbPostDocuments);
 
             });
 
@@ -79,7 +80,7 @@ module.exports = function Sensors(){
             socket.on('data-consumptions', function(data){
                 //TODO: enviar al cliente correspondiente.
                 console.log('data-consumptions : '+data);
-                consumptions.postDocuments(orden, consumptions.cbPostDocument);
+                consumptions.postDocuments(orden, consumptions.cbPostDocuments);
 
             });
 
@@ -87,7 +88,7 @@ module.exports = function Sensors(){
             socket.on('data-anemometers', function(data){
                 //TODO: enviar al cliente correspondiente.
                 console.log('data-anemometers : '+data);
-                anemometers.postDocuments(orden, anemometers.cbPostDocument);
+                anemometers.postDocuments(orden, anemometers.cbPostDocuments);
 
             });
 
@@ -95,7 +96,7 @@ module.exports = function Sensors(){
             socket.on('data-anemometers', function(data){
                 //TODO: enviar al cliente correspondiente.
                 console.log('data-anemometers : '+data);
-                anemometers.postDocuments(orden, anemometers.cbPostDocument);
+                anemometers.postDocuments(orden, anemometers.cbPostDocuments);
 
             });
 
@@ -103,7 +104,7 @@ module.exports = function Sensors(){
             socket.on('data-lapCounters', function(data){
                 //TODO: enviar al cliente correspondiente.
                 console.log('data-lapCounters : '+data);
-                lapCounters.postDocuments(orden, lapCounters.cbPostDocument);
+                lapCounters.postDocuments(orden, lapCounters.cbPostDocuments);
 
             });
 
@@ -111,7 +112,7 @@ module.exports = function Sensors(){
             socket.on('data-guides', function(data){
                 //TODO: enviar al cliente correspondiente.
                 console.log('data-guides : '+data);
-                guides.postDocuments(orden, guides.cbPostDocument);
+                guides.postDocuments(orden, guides.cbPostDocuments);
 
             });
 

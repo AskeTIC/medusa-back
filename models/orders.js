@@ -5,7 +5,7 @@ var ModelGeneral = require('./general');
 
 //Nuestro objeto Db recibe el string de la collección o modelo específico
 //TODO: poder pasarle otra BBDD
-var DbModelSensors = function(colName){
+var DbModelOrders = function(colName){
     //atributos privados
     var mongoDB = "mongodb://localhost:27017/medusa";
     var database ;
@@ -71,6 +71,6 @@ var DbModelSensors = function(colName){
         console.log('conexion a la BBDD realizada con éxito');
     }
 };
-var db = new DbModelSensors('atmospherics');
+var db = new DbModelOrders('orders');
 console.log(db.cbPostDocuments);
-module.exports = DbModelSensors;
+module.exports = DbModelOrders;

@@ -1,11 +1,9 @@
-var DbModelSensors = require('../models/sensors');
+var DbModelOrders = require('../models/orders');
 
 module.exports = function Orders(){
 
     //un objeto por cada collección a usar.
-    var atmospherics = new DbModelSensors("atmospherics");
-    //var distances = new DbModelSensors("distances");
-    //var strongs = new DbModelSensors("strongs");
+    var orders = new DbModelOrders("orders");
 
     return {
 
@@ -20,6 +18,7 @@ module.exports = function Orders(){
             socket.on('carga-controller', function(orden){
 
                 console.log('carga-controller :' + orden);
+                orders.postDocuments(orden, orders.cbPostDocuments)
             });
 
             //Cuando recibo el evento desplazamiento-controller...
