@@ -44,16 +44,58 @@ module.exports = function Orders(){
 
             //ORDENES GENERALES: SISTEMAS, ETC..
             //Cuando recibo el evento sistems-controller...
-            var status = false;
+            var sistemsStatus = false;
             socket.on('sistems-controller', function(data){
-                if(status === true){
-                    socket.emit('sistems-up', data);//TODO: Pasarle algo? En principio creo que dependiendo la fase o ensayo quizás haya que crear algo al respecto.
-                    console.log(status);
-                    status = false;
+                if(sistemsStatus === true){
+                    socket.emit('sistems-total-up', data);//TODO: Pasarle algo? En principio creo que dependiendo la fase o ensayo quizás haya que crear algo al respecto.
+                    console.log(sistemsStatus);
+                    sistemsStatus = false;
                 }else{
-                    socket.emit('sistems-down', data+1)//TODO: Pasarle algo?
-                    console.log(status);
-                    status = true;
+                    socket.emit('sistems-total-down', data+1)//TODO: Pasarle algo?
+                    console.log(sistemsStatus);
+                    sistemsStatus = true;
+                }
+            });
+
+            //Cuando recibo el evento sistems-carena...
+            var carenaStatus = false;
+            socket.on('sistems-carena', function(data){
+                if(status === true){
+                    socket.emit('sistems-carena-up', data);//TODO: Pasarle algo? En principio creo que dependiendo la fase o ensayo quizás haya que crear algo al respecto.
+                    console.log(carenaStatus);
+                    carenaStatus = false;
+                }else{
+                    socket.emit('sistems-carena-down', data+1)//TODO: Pasarle algo?
+                    console.log(carenaStatus);
+                    carenaStatus = true;
+                }
+            });
+
+            //Cuando recibo el evento sistems-heeled...
+            var heeledStatus = false;
+            socket.on('sistems-heeled', function(data){
+                if(status === true){
+                    socket.emit('sistems-heeled-up', data);//TODO: Pasarle algo? En principio creo que dependiendo la fase o ensayo quizás haya que crear algo al respecto.
+                    console.log(heeledStatus);
+                    heeledStatus = false;
+                }else{
+                    socket.emit('sistems-heeled-own', data+1)//TODO: Pasarle algo?
+                    console.log(heeledStatus);
+                    heeledStatus = true;
+                }
+            });
+
+            //Cuando recibo el evento sistems-dataCapture...
+            var dataCaptureStatus = false;
+            socket.on('sistems-dataCapture', function(data){
+                if(status === true){
+                    socket.emit('sistems-dataCapture-up', data);//TODO: Pasarle algo? En principio creo que dependiendo la fase o ensayo quizás haya que crear algo al respecto.
+                    console.log(dataCaptureStatus);
+                    dataCaptureStatus = false;
+                }else{
+                    socket.emit('sistems-dataCapture-own', data+1)//TODO: Pasarle algo?
+                    console.log(dataCaptureStatus);
+                    dataCaptureStatus = true;
                 }
             });
 
