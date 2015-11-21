@@ -18,7 +18,7 @@ var sensors = Sensors();
 //EVENTOS
 //Definición de namesapaces para sokets que vamos a usar.
 ordersIo = io.of('/');
-sensorsIo = io.of('/sensors');
+sensorsIo = io.of('/');
 //TODO: Los namespaces de Sockets han de estar en este archivo los eventos no.
 ordersIo.on('connection', orders.connectionOrders);
 sensorsIo.on('connection', sensors.connectionSensors);
