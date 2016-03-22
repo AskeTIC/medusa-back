@@ -9,8 +9,8 @@ var errors = require('../utils/errors');
 //RUTAS
 router.route('/')
 	.get(function(req, res){
-		console.log('cliente servido!');//TODO: no aparece en consola.
-		res.sendFile('public/index.html');
+		console.log('cliente servido desde ruta / tipo get() !');//TODO: no aparece en consola.
+		//res.sendFile('public/index.html');
 	});
 
 router.route('/test')
