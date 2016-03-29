@@ -1,19 +1,19 @@
 {
-  "name": "medusa-back",
+  "name": "sensoric-back",
   "version": "0.0.0",
-  "description": "Backend de proyecto Medusa",
+  "description": "Backend de proyecto Sensoric",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AskeTIC/medusa-back.git"
+    "url": "https://github.com/AskeTIC/sensoric-back.git"
   },
   "author": "@jonabasque",
   "license": "AGPL",
   "bugs": {
-    "url": "https://github.com/AskeTIC/medusa-back/issues"
+    "url": "https://github.com/AskeTIC/sensoric-back/issues"
   },
   "dependencies": {
     "express": "^4.13.4",

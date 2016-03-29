@@ -1,2 +1,2 @@
-# Medusa Backend
+# Sensoric backend
 ## Estado del proyecto
