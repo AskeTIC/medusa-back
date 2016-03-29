@@ -1,40 +1,39 @@
-var DbModelOrders = require('../models/orders');
+var orders = require('../models/index').orders;
+console.log(orders);
 
-module.exports = function Orders(){
-
-    //un objeto por cada collección a usar.
-    var orders = new DbModelOrders("orders");
+module.exports = function Orders(orders){
+    console.log(orders);
 
     return {
 
         connectionOrders: function(socket){
             //Muestro un aviso en backend
-            console.log('cliente conectado!');
+            console.log('cliente conectado desde "connectionOrders() en orders controller"!');
             //Emito al usuario conectado un evento y un mensaje
             socket.emit('conexion realizada', 'Conectado con éxito');
 
             //ORDENES ESPECIFICAS DESDE EL USUARIO
             //Cuando recibo el evento carga-controller...
             socket.on('carga-controller', function(orden){
-                orders.postDocuments(orden, orders.cbPostDocuments);
+                orders.orders.postDocuments(orden, orders.orders.cbPostDocuments);
                 console.log('carga-controller :' + orden);
             });
 
             //Cuando recibo el evento desplazamiento-controller...
             socket.on('desplazamiento-controller', function(orden){
-                orders.postDocuments(orden, orders.cbPostDocuments);
+                orders.orders.postDocuments(orden, orders.orders.cbPostDocuments);
                 console.log('desplazamiento-controller :' + orden);
             });
 
             //Cuando recibo el evento vela-controller...
             socket.on('vela-controller', function(orden){
-                orders.postDocuments(orden, orders.cbPostDocuments);
+                orders.orders.postDocuments(orden, orders.orders.cbPostDocuments);
                 console.log('vela-controller :' + orden);
             });
 
             //Cuando recibo el evento pertiga-controller...
             socket.on('pertiga-controller', function(orden){
-                orders.postDocuments(orden, orders.cbPostDocuments);
+                orders.orders.postDocuments(orden, orders.orders.cbPostDocuments);
                 console.log('Recibido evento pertiga-controller, con la data:' + orden);
             });
 

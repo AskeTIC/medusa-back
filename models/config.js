@@ -1,7 +1,7 @@
 //REQUERIMOS MODULOS DE TERCEROS
 var ModelGeneral = require('./general');
 
-module.exports = function DbModelOrders(colName, database){
+module.exports = function DbModelConfig(colName, database){
     //CONSTRUCCIÓN DEL OBJETO
     //atributos privados
     this.database = database;

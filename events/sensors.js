@@ -1,125 +1,106 @@
-var DbModelSensors = require('../models/sensors');
+var sensors = require('../models/index').sensors;
+console.log(sensors);
 
-
-module.exports = function Sensors(){
-
-    //un objeto por cada collección a usar.
-    //TODO: pasarle un array y que exporte las variables en el contexto, para haver solo una invocación a un método.
-    var atmospherics   = new DbModelSensors("atmospherics");
-    var distances      = new DbModelSensors("distances");
-    var strongs        = new DbModelSensors("strongs");
-    var inclinometers  = new DbModelSensors("inclinometers");
-    var flowmeters     = new DbModelSensors("flowmeters");
-    var microwaves     = new DbModelSensors("microwaves");
-    var consumptions   = new DbModelSensors("consumptions");
-    var anemometers    = new DbModelSensors("anemometers");
-    var lapCounters    = new DbModelSensors("lapcounters");
-    var guides         = new DbModelSensors("guides");
-
+//TODO: Autoejecutar la función para que recoja el objeto sensors importado. //TOKNOW: ¿¿Y se tendría la opción de pasar uno desde fuera ??
+module.exports = function Sensors(sensors){
+    console.log(sensors);
 
     return {
         // NAMESPACE '/sensors' QUE ES PARA LOS SENSORES
         // cuando se establece una conexión desde un cliente sensor...
         connectionSensors: function(socket){
-          	//Muestro un aviso en el backend
-          	console.log('Sensor conectado!');
-          	//Emito al sensor un evento y un mensaje para actuar en consecuencia.
-          	socket.emit('sensor-conectado', 'sensor!');
+            //Muestro un aviso en el backend
+            console.log('Sensor conectado!');
+            //Emito al sensor un evento y un mensaje para actuar en consecuencia.
+            socket.emit('sensor-conectado', 'sensor!');
 
-          	//RECIBO LOS DATOS DE LOS SENSORES
-          	//Cuando recibo datos del termomentro..
+            //RECIBO LOS DATOS DE LOS SENSORES
+            //Cuando recibo datos del termomentro..
             socket.on('data-atmospherics', function(data){
                 //TODO: enviar al cliente correspondiente.
+                sensors.atmospherics.postDocuments(data, sensors.atmospherics.cbPostDocuments);
                 console.log('data-atmospherics : '+data);
-                atmospherics.postDocuments(orden, atmospherics.cbPostDocuments);
 
             });
 
-        	   //Cuando recibo datos de los inclinometros (juntos en JSON)...
+        	//Cuando recibo datos de los inclinometros (juntos en JSON)...
             //TODO: es posible que no insterese juntar los datos en el micro y que lleguen en un JSON a guardar aquí y rebotar a los clientes.
-        	  socket.on('data-inclinometers', function(data){
-        		    //TODO: enviar al cliente correspondiente.
-        		    console.log('data-inclinometers : '+data);
-                inclinometer.postDocuments(orden, inclinometer.cbPostDocuments);
+        	 socket.on('data-inclinometers', function(data){
+        		//TODO: enviar al cliente correspondiente.
+                sensors.inclinometer.postDocuments(data, sensors.inclinometer.cbPostDocuments);
+                console.log('data-inclinometers : '+data);
 
-        	  });
+        	});
 
             //Cuando recibo datos las fuerzas...
             socket.on('data-strongs', function(data){
-        		    //TODO: enviar al cliente correspondiente.
-        		    console.log('data-strongs : '+data);
-                strongs.postDocuments(orden, strongs.cbPostDocuments);
+        		//TODO: enviar al cliente correspondiente.
+                sensors.strongs.postDocuments(data, sensors.strongs.cbPostDocuments);
+                console.log('data-strongs : '+data);
 
-        	  });
+    	    });
 
             //Cuando recibo datos de distancias...
             socket.on('data-distances', function(data){
-        		    //TODO: enviar al cliente correspondiente.
-        		    console.log('data-distances : '+data);
-                distances.postDocuments(orden, distances.cbPostDocuments);
+        		//TODO: enviar al cliente correspondiente.
+                sensors.distances.postDocuments(data, sensors.distances.cbPostDocuments);
+                console.log('data-distances : '+data);
 
-        	  });
+        	});
 
             //Cuando recibo datos de caudalimetros..
             socket.on('data-flowmeters', function(data){
                 //TODO: enviar al cliente correspondiente.
+                sensors.flowmeters.postDocuments(data, sensors.flowmeters.cbPostDocuments);
                 console.log('data-flowmeters : '+data);
-                flowmeters.postDocuments(orden, flowmeters.cbPostDocuments);
 
             });
 
             //Cuando recibo datos de microondas..
             socket.on('data-microwaves', function(data){
                 //TODO: enviar al cliente correspondiente.
+                sensors.microwaves.postDocuments(data, sensors.microwaves.cbPostDocuments);
                 console.log('data-microwaves : '+data);
-                microwaves.postDocuments(orden, microwaves.cbPostDocuments);
 
             });
 
             //Cuando recibo datos de consumos..
             socket.on('data-consumptions', function(data){
                 //TODO: enviar al cliente correspondiente.
+                sensors.consumptions.postDocuments(orden, sensors.consumptions.cbPostDocuments);
                 console.log('data-consumptions : '+data);
-                consumptions.postDocuments(orden, consumptions.cbPostDocuments);
 
             });
 
             //Cuando recibo datos de anemometros..
             socket.on('data-anemometers', function(data){
                 //TODO: enviar al cliente correspondiente.
+                sensors.anemometers.postDocuments(data, sensors.anemometers.cbPostDocuments);
                 console.log('data-anemometers : '+data);
-                anemometers.postDocuments(orden, anemometers.cbPostDocuments);
-
-            });
-
-            //Cuando recibo datos de anemometros..
-            socket.on('data-anemometers', function(data){
-                //TODO: enviar al cliente correspondiente.
-                console.log('data-anemometers : '+data);
-                anemometers.postDocuments(orden, anemometers.cbPostDocuments);
 
             });
 
             //Cuando recibo datos de cuentavueltas..
             socket.on('data-lapCounters', function(data){
                 //TODO: enviar al cliente correspondiente.
+                sensors.lapCounters.postDocuments(orden, sensors.lapCounters.cbPostDocuments);
                 console.log('data-lapCounters : '+data);
-                lapCounters.postDocuments(orden, lapCounters.cbPostDocuments);
 
             });
 
             //Cuando recibo datos de guias (brujula, veleta, etc)...
             socket.on('data-guides', function(data){
                 //TODO: enviar al cliente correspondiente.
+                sensors.guides.postDocuments(orden, sensors.guides.cbPostDocuments);
                 console.log('data-guides : '+data);
-                guides.postDocuments(orden, guides.cbPostDocuments);
 
             });
 
-        	  //Cuando se desconecta el sensor...
-        	  socket.on('disconnect', function () {
+        	//Cuando se desconecta el sensor...
+        	socket.on('disconnect', function () {
                 //Haré algo al respecto, si pogo io.emit envío a todos los usuarios
                 socket.emit('sensor disconnected'); //En este caso me interesará enviar a los clientes usuarios no sensores.
+                console.log('sensor desconectado');
             });
 
         }
